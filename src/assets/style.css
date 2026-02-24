@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  font-family: system-ui;
+  background: #f3f4f6;
+}
+
+/* layout */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: #0f1b2e;
+  color: white;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.sidebar.closed {
+  width: 0px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  color: #cbd5f1;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.sidebar a.active {
+  background: #1e293b;
+  color: white;
+}
+
+.content {
+  flex: 1;
+  background: #f3f4f6;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.dark .content {
+  background: #0b1220;
+  color: #e5e7eb;
+}
+
+.dark .topbar {
+  background: #111827;
+  color: white;
+}
+
+.dash-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap: 20px;
+}
+
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat {
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.badge.low { background:#d1fae5; color:#065f46; }
+.badge.medium { background:#fef3c7; color:#92400e; }
+.badge.high { background:#fee2e2; color:#991b1b; }
+
+.risk-row {
+  display: flex;
+  gap: 40px;
+}
+
+.muted {
+  color:#666;
+}
+
+.error {
+  color:#b91c1c;
+}
