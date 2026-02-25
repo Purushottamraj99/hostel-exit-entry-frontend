@@ -1,4 +1,4 @@
-const BASE = "https://hostel-exit-entry.onrender.com/api?v=2";
+export const BASE = "https://hostel-exit-entry.onrender.com";
 
 /* ---------- helper ---------- */
 
