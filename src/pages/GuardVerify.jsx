@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
-import { api } from "../services/api";
+import { BASE } from "../services/api";
 
 export default function GuardVerify() {
 

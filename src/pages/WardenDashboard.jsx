@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api } from "../services/api";
+import { BASE } from "../services/api";
 
 export default function WardenDashboard() {
   const [outside, setOutside] = useState([]);
@@ -69,8 +69,9 @@ export default function WardenDashboard() {
             <div>{new Date(x.exitTime).toLocaleTimeString()}</div>
             <div>
               <a
-                href={`http://localhost:5000/api/pass/${x._id}`}
+                href={`${BASE}/api/pass/${x._id}`}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 PDF
               </a>

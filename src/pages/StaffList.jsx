@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BASE } from "../services/api";
 
 export default function StaffList() {
 
@@ -17,7 +18,7 @@ export default function StaffList() {
     try {
       setLoading(true);
 
-      const r = await fetch("http://localhost:5000/api/staff/list");
+      const r = await fetch(`${BASE}/api/staff/list`);
       const d = await r.json();
 
       setData(d || []);
@@ -31,7 +32,7 @@ export default function StaffList() {
     const ok = window.confirm("Delete this staff?");
     if (!ok) return;
 
-    await fetch(`http://localhost:5000/api/staff/${id}`, {
+    await fetch(`${BASE}/api/staff/${id}`, {
       method: "DELETE"
     });
 
@@ -40,7 +41,7 @@ export default function StaffList() {
 
   /* ===== EDIT SAVE ===== */
   const saveEdit = async () => {
-    await fetch(`http://localhost:5000/api/staff/${editData._id}`, {
+    await fetch(`${BASE}/api/student/${editData._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editData)

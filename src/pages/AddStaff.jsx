@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BASE } from "../services/api";
 
 export default function AddStaff() {
 
@@ -42,7 +43,7 @@ export default function AddStaff() {
       setLoading(true);
 
       const r = await fetch(
-        "http://localhost:5000/api/staff/add",
+        `${BASE}/api/staff/add`,
         {
           method:"POST",
           headers:{ "Content-Type":"application/json"},

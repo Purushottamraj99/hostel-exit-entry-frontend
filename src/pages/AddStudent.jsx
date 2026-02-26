@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { api } from "../services/api";
+import { BASE } from "../services/api";
 import { QRCodeCanvas } from "qrcode.react";
 
 export default function AddStudent() {

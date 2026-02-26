@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { api } from "../services/api";
+import { BASE } from "../services/api";
 
 export default function ExitForm() {
 
@@ -37,11 +37,7 @@ export default function ExitForm() {
 
       // 🔥 PDF OPEN (NOT DOWNLOAD)
       if (res.log?._id) {
-        window.open(
-          `http://localhost:5000/api/pass/${res.log._id}`,
-          "_blank",
-          "noopener,noreferrer"
-        );
+       window.open(`${BASE}/api/pass/${res.log._id}`);
       }
 
       setReason("");

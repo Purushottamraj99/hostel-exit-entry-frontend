@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api } from "../services/api";
+import { BASE } from "../services/api";
 
 export default function OutsideList() {
 
@@ -79,7 +79,7 @@ export default function OutsideList() {
             <div>
               <a
                 className="pdf-btn"
-                href={`http://localhost:5000/api/pass/${x._id}`}
+                href={`${BASE}/api/pass/${x._id}`}
                 target="_blank"
                 rel="noreferrer"
               >
