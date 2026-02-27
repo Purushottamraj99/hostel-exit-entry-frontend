@@ -82,7 +82,7 @@ const load = async () => {
             <div>
               <a
                 className="pdf-btn"
-                href={`${BASE}/api/pass/${x._id}`}
+                href={`${BASE}/pass/${x._id}`}
                 target="_blank"
                 rel="noreferrer"
               >
