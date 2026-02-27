@@ -37,7 +37,7 @@ export default function ExitForm() {
 
       // 🔥 PDF OPEN (NOT DOWNLOAD)
       if (res.log?._id) {
-      window.open(`${BASE}/api/pass/${res.log._id}`);
+      window.open(`${BASE}/pass/${res.log._id}`);
       }
 
       setReason("");
