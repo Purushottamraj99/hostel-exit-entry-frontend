@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api} from "../services/api";
+import { api, BASE} from "../services/api";
 
 export default function OutsideList() {
 
@@ -11,8 +11,7 @@ const load = async () => {
     setLoading(true);
 
     const r = await api.outsideList();
-
-    setRows(Array.isArray(r) ? r : []);
+     setRows(Array.isArray(r.data) ? r.data : []);
 
   } catch (e) {
     console.log(e);
