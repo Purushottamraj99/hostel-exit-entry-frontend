@@ -1,4 +1,4 @@
-export const BASE = "https://hostel-exit-entry.onrender.com";
+export const BASE = "https://hostel-exit-entry.onrender.com/api";
 
 /* ---------- helper ---------- */
 
@@ -22,12 +22,12 @@ async function jfetch(url, opts = {}) {
 }
 export const api = {
   /* ===== LOGIN ===== */
-  login: (id, password) =>
-  jfetch(BASE + "/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ id, password })
-  }),
+  login: (id, password, roleHint = "auto") =>
+    jfetch(BASE + "/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, password, roleHint })
+    }),
     
 
   /* ===== STUDENT ===== */

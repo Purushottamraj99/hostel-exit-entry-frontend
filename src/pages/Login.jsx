@@ -17,7 +17,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const r = await fetch(BASE + "/api/login", {
+      const r = await fetch(BASE + "/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id, password, roleHint })
@@ -31,14 +31,14 @@ export default function Login() {
         return;
       }
 
-      // ✅ store session
+      //  store session
      localStorage.setItem("user", JSON.stringify(res.user));
      localStorage.setItem("studentId", res.user.role === "student" ? res.user.id : "");
      localStorage.setItem("studentName", res.user.role === "student" ? res.user.name : "");
      localStorage.setItem("role", res.user.role);
      
 
-      // ✅ role redirect
+      // role redirect
       const role = res.user.role;
 
       if (role === "admin") nav("/admin");
