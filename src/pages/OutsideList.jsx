@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api} from "../services/api";
+import { BASE} from "../services/api";
 
 export default function OutsideList() {
 
