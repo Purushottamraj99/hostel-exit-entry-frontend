@@ -57,7 +57,7 @@ export default function Login() {
     <div style={wrap}>
       <form style={card} onSubmit={handleLogin}>
 
-        <h2>HOSTEL GATE PASS</h2>
+        <h2>AGC HOSTEL GATE PASS</h2>
         <p style={sub}>Multi-Role Login</p>
 
         {/* ROLE SELECT */}
