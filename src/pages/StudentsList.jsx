@@ -18,7 +18,7 @@ export default function StudentsList() {
     try {
       setLoading(true);
 
-      const r = await fetch(`${BASE}/api/student/list`);
+      const r = await fetch(`${BASE}/student/list`);
       const d = await r.json();
 
       setData(d || []);
@@ -32,7 +32,7 @@ export default function StudentsList() {
     const ok = window.confirm("Delete this student?");
     if (!ok) return;
 
-    await fetch(`${BASE}/api/student/${id}`, {
+    await fetch(`${BASE}/student/${id}`, {
       method: "DELETE"
     });
 
@@ -41,7 +41,7 @@ export default function StudentsList() {
 
   /* ===== EDIT SAVE ===== */
   const saveEdit = async () => {
-    await fetch(`${BASE}/api/student/${editData.studentId}`, {
+    await fetch(`${BASE}/student/${editData.studentId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editData)

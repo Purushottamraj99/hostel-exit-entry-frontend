@@ -43,7 +43,7 @@ export default function AddStaff() {
       setLoading(true);
 
       const r = await fetch(
-        `${BASE}/api/staff/add`,
+        `${BASE}/staff/add`,
         {
           method:"POST",
           headers:{ "Content-Type":"application/json"},

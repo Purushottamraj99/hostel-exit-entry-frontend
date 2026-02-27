@@ -18,7 +18,7 @@ export default function StaffList() {
     try {
       setLoading(true);
 
-      const r = await fetch(`${BASE}/api/staff/list`);
+      const r = await fetch(`${BASE}/staff/list`);
       const d = await r.json();
 
       setData(d || []);
@@ -32,7 +32,7 @@ export default function StaffList() {
     const ok = window.confirm("Delete this staff?");
     if (!ok) return;
 
-    await fetch(`${BASE}/api/staff/${id}`, {
+    await fetch(`${BASE}/staff/${id}`, {
       method: "DELETE"
     });
 
@@ -41,7 +41,7 @@ export default function StaffList() {
 
   /* ===== EDIT SAVE ===== */
   const saveEdit = async () => {
-    await fetch(`${BASE}/api/student/${editData._id}`, {
+    await fetch(`${BASE}/student/${editData._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editData)
