@@ -21,19 +21,29 @@ export default function AdminDashboard() {
   }, []);
 
   const load = async () => {
-    try {
-      setLoading(true);
-      const t = await api.todayStats();
-      const o = await api.outsideList();
+  try {
+    setLoading(true);
 
-      setToday(t.todayExits || 0);
-      setOutside(o.data || []);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
+    const t = await api.todayStats();
+    const o = await api.outsideList();
+
+    
+    setToday(t?.todayExits || t?.count || 0);
+
+    if (Array.isArray(o)) {
+      setOutside(o);
+    } else if (Array.isArray(o?.data)) {
+      setOutside(o.data);
+    } else {
+      setOutside([]);
     }
-  };
+
+  } catch (e) {
+    console.log("DASHBOARD LOAD ERROR:", e);
+  } finally {
+    setLoading(false);
+  }
+};
 
   if (loading) return <div className="pro-loading">Loading Dashboard...</div>;
 
