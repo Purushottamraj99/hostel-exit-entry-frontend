@@ -49,7 +49,16 @@ export default function AddStudent() {
     try {
       setLoading(true);
 
-      const res = await api.addStudent(form);
+      const r = await fetch(
+        `${BASE}/student/add`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form)
+        }
+      );
+
+      const res = await r.json();
 
       if (!res.success) {
         showToast(res.message || "Failed");
