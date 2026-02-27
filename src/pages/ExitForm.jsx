@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BASE } from "../services/api";
+import { api } from "../services/api";
 
 export default function ExitForm() {
 
