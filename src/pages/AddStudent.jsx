@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BASE } from "../services/api";
+import {api } from "../services/api";
 import { QRCodeCanvas } from "qrcode.react";
 
 export default function AddStudent() {
@@ -49,16 +49,7 @@ export default function AddStudent() {
     try {
       setLoading(true);
 
-      const r = await fetch(
-        `${BASE}/student/add`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form)
-        }
-      );
-
-      const res = await r.json();
+      const res = await api.addStudent(form);
 
       if (!res.success) {
         showToast(res.message || "Failed");
