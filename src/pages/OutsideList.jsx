@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react";
-import { BASE} from "../services/api";
+import { api} from "../services/api";
 
 export default function OutsideList() {
 
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const load = async () => {
-    try {
-      setLoading(true);
-      const r = await api.outsideList();
-      setRows(Array.isArray(r.data) ? r.data : []);
-} catch (e) {
-  console.log(e);
-  alert("Load failed");
-} finally {
-      setLoading(false);
-    }
-  };
+const load = async () => {
+  try {
+    setLoading(true);
+
+    const r = await api.outsideList();
+
+    setRows(Array.isArray(r) ? r : []);
+
+  } catch (e) {
+    console.log(e);
+    alert("Load failed");
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     load();
