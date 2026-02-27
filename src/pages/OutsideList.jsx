@@ -11,6 +11,7 @@ const load = async () => {
     setLoading(true);
 
     const r = await api.outsideList();
+  
      setRows(Array.isArray(r.data) ? r.data : []);
 
   } catch (e) {
