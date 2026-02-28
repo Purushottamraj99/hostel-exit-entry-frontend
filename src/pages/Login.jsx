@@ -54,114 +54,52 @@ export default function Login() {
   };
 
   return (
-    <div style={wrap}>
-      <form style={card} onSubmit={handleLogin}>
+  <div className="login-wrap">
+    <form className="login-card" onSubmit={handleLogin}>
 
-        <h2>AGC HOSTEL GATE PASS</h2>
-        <p style={sub}>Multi-Role Login</p>
+      <h2>AGC HOSTEL GATE PASS</h2>
+      <p className="login-sub">Multi-Role Login</p>
 
-        {/* ROLE SELECT */}
-        <select
-          value={roleHint}
-          onChange={e => setRoleHint(e.target.value)}
-          style={input}
-        >
-          <option value="auto">Auto Detect Role</option>
-          <option value="student">Student</option>
-          <option value="admin">Admin</option>
-          <option value="warden">Warden</option>
-          <option value="guard">Guard</option>
-        </select>
+      <select
+        value={roleHint}
+        onChange={e => setRoleHint(e.target.value)}
+        className="login-input"
+      >
+        <option value="auto">Auto Detect Role</option>
+        <option value="student">Student</option>
+        <option value="admin">Admin</option>
+        <option value="warden">Warden</option>
+        <option value="guard">Guard</option>
+      </select>
 
-        <input
-          placeholder="User ID"
-          value={id}
-          onChange={e => setId(e.target.value)}
-          style={input}
-          required
-        />
+      <input
+        placeholder="User ID"
+        value={id}
+        onChange={e => setId(e.target.value)}
+        className="login-input"
+        required
+      />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          style={input}
-          required
-        />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        className="login-input"
+        required
+      />
 
-        <button style={btn} disabled={loading}>
-          {loading ? "Checking..." : "Login"}
-        </button>
+      <button className="login-btn" disabled={loading}>
+        {loading ? "Checking..." : "Login"}
+      </button>
 
-        {msg && <p style={err}>{msg}</p>}
+      {msg && <p className="login-err">{msg}</p>}
 
-        <p style={hint}>
-          Example: ADMIN1 / admin123
-        </p>
+      <p className="login-hint">
+        Example: ADMIN1 / admin123
+      </p>
 
-      </form>
-    </div>
+    </form>
+  </div>
   );
 }
-
-/* ---- styles ---- */
-
-const wrap = {
-  textAlign: "center",
-  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-  h2: {
-    fontWeight: "bold"
-  },
-  minHeight: "100vh",
-  display: "grid",
-  placeItems: "center",
-  background:
-    "linear-gradient(135deg,#1e3c72,#2a5298)"
-};
-
-const card = {
-  background: "white",
-  padding: 40,
-  borderRadius: 18,
-  width: 380,
-  display: "grid",
-  gap: 14,
-  boxShadow: "0 25px 60px rgba(0,0,0,0.25)"
-};
-
-const sub = {
-  margin: 0,
-  textAlign: "center",
-  color: "#666",
-  fontSize: "15px",
-};
-
-const input = {
-  padding: 13,
-  borderRadius: 10,
-  border: "1px solid #ddd",
-  fontSize: 14
-};
-
-const btn = {
-  padding: 14,
-  borderRadius: 12,
-  border: "none",
-  background: "#2563eb",
-  color: "white",
-  fontSize: 16,
-  cursor: "pointer"
-};
-
-const err = {
-  color: "crimson",
-  textAlign: "center"
-};
-
-const hint = {
-  fontSize: 12,
-  textAlign: "center",
-  color: "#888"
-};
-

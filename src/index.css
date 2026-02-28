@@ -271,6 +271,73 @@ body {
   background: #020617;
 }
 
+/* login  */
+.login-wrap {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 20px 10px;
+  background: linear-gradient(135deg,#1e3c72,#2a5298);
+}
+
+.login-card {
+  background: white;
+  padding: 32px;
+  border-radius: 18px;
+  width: 90%;
+  max-width: 380px;
+  display: grid;
+  gap: 14px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+}
+
+.login-sub {
+  margin: 0;
+  color: #666;
+  font-size: 15px;
+}
+
+.login-input {
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-btn {
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-err {
+  color: crimson;
+}
+
+.login-hint {
+  font-size: 12px;
+  color: #888;
+}
+
+/* ===== MOBILE EXTRA FIX ===== */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 22px;
+    border-radius: 14px;
+  }
+
+  .login-btn {
+    font-size: 15px;
+  }
+}
 
 /* ===== ADMIN DASHBOARD ===== */
 
