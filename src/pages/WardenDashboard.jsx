@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BASE } from "../services/api";
+import { api,BASE } from "../services/api";
 
 export default function WardenDashboard() {
   const [outside, setOutside] = useState([]);
