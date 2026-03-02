@@ -776,14 +776,14 @@ body {
 /* ===== COLLEGE ID CARD ===== */
 
 .id-card{
-  width:420px;                 /* ⭐ form ke equal */
+  width:420px;                 
   border-radius:22px;
   overflow:hidden;
   background:linear-gradient(160deg,#1e3a8a,#2563eb);
   color:white;
   box-shadow:0 20px 40px rgba(37,99,235,.35);
   display:flex;
-  flex-direction:column;       /* ⭐ FIX */
+  flex-direction:column;      
 }
 
 /* header strip */
