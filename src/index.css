@@ -1563,3 +1563,86 @@ body {
   background:#dc2626;
 }
 
+
+/* ============================= */
+/* 📱 MOBILE RESPONSIVE FIX */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  /* APP */
+  .app {
+    display: flex;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* SIDEBAR MOBILE */
+  .sidebar,
+  .sidebar.modern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(-100%);
+    width: 220px;
+  }
+
+  /* OPEN STATE */
+  .sidebar.modern {
+    transform: translateX(0);
+  }
+
+  /* CLOSED STATE */
+  .sidebar.modern.closed {
+    transform: translateX(-100%);
+  }
+
+  /* CONTENT FULL WIDTH */
+  .content {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    height: auto;
+    padding: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* BUTTONS */
+  .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  /* MAIN CONTENT */
+  .main-content {
+    padding: 10px !important;
+  }
+
+  /* GRID */
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  /* TABLE SCROLL */
+  .table {
+    overflow-x: auto;
+  }
+
+  /* NAVBAR */
+  .navbar {
+    padding: 10px;
+    flex-wrap: wrap;
+    height: auto;
+  }
+
+  .logo {
+    font-size: 16px;
+  }
+
+}

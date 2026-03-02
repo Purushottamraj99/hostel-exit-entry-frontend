@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 
 export default function Layout({ children }) {
   const [dark, setDark] = useState(false);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(window.innerWidth > 768);
 
   return (
     <div className={dark ? "app dark" : "app"}>
@@ -32,7 +32,7 @@ export default function Layout({ children }) {
           </div>
         </header>
 
-        <main style={{ padding: 24 }}>{children}</main>
+        <main className="main-content">{children}</main>
       </div>
     </div>
   );
