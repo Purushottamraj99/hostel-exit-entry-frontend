@@ -15,44 +15,44 @@ export default function Login() {
   const [showPass, setShowPass] = useState(false);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setMsg("");
-    setLoading(true);
+  e.preventDefault();
+  setMsg("");
+  setLoading(true);
 
-    try {
-      const r = await fetch(BASE + "/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, password, roleHint })
-      });
+  try {
+    const r = await fetch(BASE + "/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, password, roleHint })
+    });
 
-      const res = await r.json();
+    const res = await r.json();
 
-      if (!res.success) {
-        setMsg(res.message || "Login failed");
-        setLoading(false);
-        return;
-      }
-
-      localStorage.setItem("user", JSON.stringify(res.user));
-      localStorage.setItem("studentId",
-        res.user.role === "student" ? res.user.id : ""
-      );
-      localStorage.setItem("role", res.user.role);
-
-      const role = res.user.role;
-
-      if (role === "admin") nav("/admin");
-      else if (role === "warden") nav("/warden");
-      else if (role === "guard") nav("/guard");
-      else nav("/student");
-
-    } catch {
-      setMsg("Server not reachable");
+    if (!res.success) {
+      setMsg(res.message || "Login failed");
+      return;
     }
 
-    setLoading(false);
-  };
+    localStorage.setItem("user", JSON.stringify(res.user));
+    localStorage.setItem(
+      "studentId",
+      res.user.role === "student" ? res.user.id : ""
+    );
+    localStorage.setItem("role", res.user.role);
+
+    const role = res.user.role;
+
+    if (role === "admin") nav("/admin");
+    else if (role === "warden") nav("/warden");
+    else if (role === "guard") nav("/guard");
+    else nav("/student");
+
+  } catch (err) {
+    setMsg("Server not reachable");
+  } finally {
+    setLoading(false); // ⭐ ALWAYS RUNS
+  }
+};
 
   return (
     <div className="login-wrap">
