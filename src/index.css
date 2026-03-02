@@ -5,12 +5,10 @@
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;   
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f6fb;
+  color: #111827;
 }
 
 /* ===== APP LAYOUT ===== */
@@ -18,7 +16,6 @@ body,
 .app {
   display: flex;
   min-height: 100vh;
-  overflow: hidden;
 }
 
 .content {
@@ -41,7 +38,6 @@ body,
 /* ===== SIDEBAR ===== */
 
 .sidebar {
-  position: fixed;
   width: 240px;
   background: #0f172a;
   color: white;
@@ -177,7 +173,6 @@ body,
   align-items: center;
   padding: 0 24px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-  position: fixed;
 }
 
 /* .logo h2{
@@ -221,7 +216,6 @@ body,
   flex-direction: column;
   transition: all .3s ease;
   box-shadow: 4px 0 20px rgba(0,0,0,.15);
-  position: fixed;
 }
 
 .sidebar.modern.closed {
