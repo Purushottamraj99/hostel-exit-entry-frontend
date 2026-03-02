@@ -14,46 +14,25 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
 
-  const handleLogin = async (e) => {
-  e.preventDefault();
-  setMsg("");
-  setLoading(true);
-
+  const handleLogin = async () => {
   try {
-    const r = await fetch(BASE + "/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, password, roleHint })
-    });
+    setLoading(true);
 
-    const res = await r.json();
+    const res = await api.login(data);
 
-    if (!res.success) {
-      setMsg(res.message || "Login failed");
-      return;
+    if (res.success) {
+      navigate("/admin");
+    } else {
+      alert(res.message);
     }
 
-    localStorage.setItem("user", JSON.stringify(res.user));
-    localStorage.setItem(
-      "studentId",
-      res.user.role === "student" ? res.user.id : ""
-    );
-    localStorage.setItem("role", res.user.role);
-
-    const role = res.user.role;
-
-    if (role === "admin") nav("/admin");
-    else if (role === "warden") nav("/warden");
-    else if (role === "guard") nav("/guard");
-    else nav("/student");
-
   } catch (err) {
-    setMsg("Server not reachable");
+    console.error(err);
+    alert("Login failed");
   } finally {
-    setLoading(false); // ⭐ ALWAYS RUNS
+    setLoading(false); // ⭐ MOST IMPORTANT
   }
 };
-
   return (
     <div className="login-wrap">
 
