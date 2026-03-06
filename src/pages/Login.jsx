@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BASE } from "../services/api";
+import { api } from "../services/api";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
@@ -14,25 +14,43 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
 
-  const handleLogin = async () => {
-  try {
-    setLoading(true);
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-    const res = await api.login(data);
+    try {
 
-    if (res.success) {
-      navigate("/admin");
-    } else {
-      alert(res.message);
+      setLoading(true);
+
+      const res = await api.login(id, password, roleHint);
+
+      if (!res.success) {
+        setMsg(res.message || "Login failed");
+        return;
+      }
+
+      // save user
+      localStorage.setItem("user", JSON.stringify(res.user));
+      localStorage.setItem("role", res.user.role);
+
+      const role = res.user.role;
+
+      if (role === "admin") nav("/admin");
+      else if (role === "warden") nav("/warden");
+      else if (role === "guard") nav("/guard");
+      else nav("/student");
+
+    } catch (err) {
+
+      console.error(err);
+      setMsg("Server not reachable");
+
+    } finally {
+
+      setLoading(false);
+
     }
+  };
 
-  } catch (err) {
-    console.error(err);
-    alert("Login failed");
-  } finally {
-    setLoading(false); // ⭐ MOST IMPORTANT
-  }
-};
   return (
     <div className="login-wrap">
 
@@ -62,7 +80,9 @@ export default function Login() {
         />
 
         {/* PASSWORD WITH ICON */}
+
         <div className="pass-wrap">
+
           <input
             className="login-input"
             type={showPass ? "text" : "password"}
@@ -78,6 +98,7 @@ export default function Login() {
           >
             {showPass ? <FaEyeSlash /> : <FaEye />}
           </span>
+
         </div>
 
         <button className="login-btn" disabled={loading}>
