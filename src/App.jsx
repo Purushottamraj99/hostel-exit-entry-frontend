@@ -14,6 +14,7 @@ import EntryForm from "./pages/EntryForm";
 import StudentsList from "./pages/StudentsList";
 import AddStaff from "./pages/AddStaff";
 import StaffList from "./pages/StaffList";
+import MyRequests from "./pages/MyRequests";
 
 
 export default function App() {
@@ -94,7 +95,11 @@ export default function App() {
   </ProtectedRoute>
 }/>
 
-
+<Route path="/my-requests" element={
+  <ProtectedRoute allow={["student"]}>
+    <Layout><MyRequests /></Layout>
+  </ProtectedRoute>
+}/>
 
 
     </Routes>

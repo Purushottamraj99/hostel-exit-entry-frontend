@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { api, BASE } from "../services/api";
+import { api } from "../services/api";
 
 export default function ExitForm() {
 
@@ -22,23 +22,18 @@ export default function ExitForm() {
     }
 
     try {
+
       setLoading(true);
       setMsg("");
 
-      const res = await api.exit(studentId, reason);
-      console.log("EXIT RESPONSE:", res);
+      const res = await api.exitRequest(studentId, reason);
 
       if (!res.success) {
-        setMsg(res.message || "Exit failed");
+        setMsg(res.message || "Request failed");
         return;
       }
 
-      setMsg("Exit recorded successfully");
-
-      // 🔥 PDF OPEN (NOT DOWNLOAD)
-      if (res.log?._id) {
-      window.open(`${BASE}/pass/${res.log._id}`);
-      }
+      setMsg("Exit request sent to warden. Waiting for approval.");
 
       setReason("");
 
@@ -47,6 +42,7 @@ export default function ExitForm() {
     } finally {
       setLoading(false);
     }
+
   };
 
   return (
@@ -78,6 +74,7 @@ export default function ExitForm() {
         {msg && <p className="exit-msg">{msg}</p>}
 
       </div>
+
     </div>
   );
 }

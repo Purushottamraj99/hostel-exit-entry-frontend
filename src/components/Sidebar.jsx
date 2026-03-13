@@ -23,7 +23,8 @@ export default function Sidebar({ open }) {
     student: [
   { to: "/student", label: "My Dashboard" , icon: <FaUserGraduate />},
   { to: "/exit", label: "Exit Form", icon: <FaSignOutAlt />  },
-  { to: "/entry", label: "Entry Form", icon: <FaHome /> }
+  { to: "/entry", label: "Entry Form", icon: <FaHome /> },
+  { to: "/my-requests", label: "My Requests", icon: <FaList /> },
 ],
 
     admin: [

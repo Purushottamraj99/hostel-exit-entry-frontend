@@ -28,7 +28,7 @@ export const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, password, roleHint })
     }),
-    
+
 
   /* ===== STUDENT ===== */
   getRisk: (studentId) =>
@@ -52,6 +52,10 @@ export const api = {
   studentList: () =>
     jfetch(BASE + "/student/list"),
 
+  /* ===== STUDENT ===== */
+
+myRequests: (studentId) =>
+  jfetch(BASE + "/my-requests/" + studentId),
   /* ===== STAFF ===== */
 
   addStaff: (data) =>
@@ -85,6 +89,18 @@ export const api = {
       body: JSON.stringify({ studentId })
     }),
 
+  exitRequests: () =>
+    jfetch(BASE + "/exit-requests"),
+
+  approveExit: (id) =>
+    jfetch(BASE + "/approve-exit/" + id, {
+      method: "POST"
+    }),
+
+  rejectExit: (id) =>
+    jfetch(BASE + "/reject-exit/" + id, {
+      method: "POST"
+    }),
   /* ===== GUARD ===== */
 
   verifyPass: (logId) =>
