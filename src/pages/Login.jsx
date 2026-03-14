@@ -15,41 +15,47 @@ export default function Login() {
   const [showPass, setShowPass] = useState(false);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
+  try {
 
-      setLoading(true);
+    setLoading(true);
 
-      const res = await api.login(id, password, roleHint);
+    const res = await api.login(id, password, roleHint);
 
-      if (!res.success) {
-        setMsg(res.message || "Login failed");
-        return;
-      }
-
-      // save user
-      localStorage.setItem("user", JSON.stringify(res.user));
-      localStorage.setItem("role", res.user.role);
-
-      const role = res.user.role;
-
-      if (role === "admin") nav("/admin");
-      else if (role === "warden") nav("/warden");
-      else if (role === "guard") nav("/guard");
-      else nav("/student");
-
-    } catch (err) {
-
-      console.error(err);
-      setMsg("Server not reachable");
-
-    } finally {
-
-      setLoading(false);
-
+    if (!res.success) {
+      setMsg(res.message || "Login failed");
+      return;
     }
-  };
+
+    // SAVE SESSION
+    localStorage.setItem("user", JSON.stringify(res.user));
+    localStorage.setItem("role", res.user.role);
+
+    // ⭐ IMPORTANT FIX
+    if (res.user.role === "student") {
+      localStorage.setItem("studentId", res.user.id);
+      localStorage.setItem("studentName", res.user.name);
+    }
+
+    const role = res.user.role;
+
+    if (role === "admin") nav("/admin");
+    else if (role === "warden") nav("/warden");
+    else if (role === "guard") nav("/guard");
+    else nav("/student");
+
+  } catch (err) {
+
+    console.error(err);
+    setMsg("Server not reachable");
+
+  } finally {
+
+    setLoading(false);
+
+  }
+};
 
   return (
     <div className="login-wrap">
