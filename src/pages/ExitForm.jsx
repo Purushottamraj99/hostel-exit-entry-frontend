@@ -26,7 +26,7 @@ export default function ExitForm() {
       setLoading(true);
       setMsg("");
 
-      const res = await api.exitRequest(studentId, reason);
+      const res = await api.exit(studentId, reason);
 
       if (!res.success) {
         setMsg(res.message || "Request failed");
