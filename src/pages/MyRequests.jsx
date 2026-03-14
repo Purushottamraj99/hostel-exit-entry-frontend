@@ -9,8 +9,10 @@ export default function MyRequests() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    load();
-  }, []);
+    if (studentId) {
+      load();
+    }
+  }, [studentId]);
 
   const load = async () => {
 

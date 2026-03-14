@@ -29,16 +29,24 @@ export default function Login() {
     }
 
     // SAVE SESSION
-    localStorage.setItem("user", JSON.stringify(res.user));
-    localStorage.setItem("role", res.user.role);
+    const user = {
+      ...res.user,
+      role: (res.user?.role || "").toLowerCase(),
+    };
 
-    // ⭐ IMPORTANT FIX
-    if (res.user.role === "student") {
-      localStorage.setItem("studentId", res.user.id);
-      localStorage.setItem("studentName", res.user.name);
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("role", user.role);
+
+    // ⭐ IMPORTANT FIX (ensure student id/name are always stored for student users)
+    if (user.role === "student") {
+      localStorage.setItem("studentId", user.id);
+      localStorage.setItem("studentName", user.name);
+    } else {
+      localStorage.removeItem("studentId");
+      localStorage.removeItem("studentName");
     }
 
-    const role = res.user.role;
+    const role = user.role;
 
     if (role === "admin") nav("/admin");
     else if (role === "warden") nav("/warden");
