@@ -1563,3 +1563,95 @@ body {
   background:#dc2626;
 }
 
+/* ===== My Requests Page ===== */
+
+.requests-page {
+  padding: 20px;
+}
+
+.requests-page h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* ===== Table Container ===== */
+
+.table {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* ===== Table Header ===== */
+
+.table-head {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr;
+  background: #0f172a;
+  color: white;
+  padding: 14px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* ===== Table Row ===== */
+
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr;
+  padding: 14px;
+  border-top: 1px solid #e5e7eb;
+  align-items: center;
+  font-size: 14px;
+}
+
+.table-row:hover {
+  background: #f9fafb;
+}
+
+/* ===== Status Tags ===== */
+
+.status {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+}
+
+/* pending */
+
+.status.PENDING {
+  background: #f59e0b;
+}
+
+/* approved */
+
+.status.APPROVED {
+  background: #10b981;
+}
+
+/* rejected */
+
+.status.REJECTED {
+  background: #ef4444;
+}
+
+/* ===== Pass Button ===== */
+
+.table-row a {
+  text-decoration: none;
+  background: #2563eb;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.table-row a:hover {
+  background: #1d4ed8;
+}
