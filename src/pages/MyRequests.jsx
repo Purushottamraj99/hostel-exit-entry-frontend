@@ -50,6 +50,7 @@ export default function MyRequests() {
           <div>Category</div>
           <div>Status</div>
           <div>Time</div>
+          <div>Pass</div>
         </div>
 
         {rows.length === 0 && (
@@ -67,13 +68,25 @@ export default function MyRequests() {
             <div>{x.reasonCategory}</div>
 
             <div>
-              <span className={`status ${x.status}`}>
-                {x.status}
+              <span className={`status ${x.approvalStatus}`}>
+                {x.approvalStatus}
               </span>
             </div>
 
             <div>
               {new Date(x.createdAt).toLocaleString()}
+            </div>
+
+            <div>
+              {x.approvalStatus === "APPROVED" && (
+                <a
+                  href={`https://hostel-exit-entry.onrender.com/api/pass/${x._id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Pass
+                </a>
+              )}
             </div>
 
           </div>

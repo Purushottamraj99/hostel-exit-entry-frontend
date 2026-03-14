@@ -12,21 +12,27 @@ export default function WardenDashboard() {
   }, []);
 
   const load = async () => {
-    try {
-      setLoading(true);
 
-      const o = await api.exitRequests();   // 🔹 pending requests
-      const t = await api.todayStats();
+  try {
 
-      setRequests(o.data || []);
-      setToday(t.todayExits || 0);
+    setLoading(true);
 
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const r = await api.exitRequests();
+    const t = await api.todayStats();
+    const o = await api.outsideList();
+
+    setRequests(r.data || []);
+    setToday(t.todayExits || 0);
+    setOutsideCount(o.count || 0);
+
+  } catch(e){
+    console.log(e);
+  }
+  finally{
+    setLoading(false);
+  }
+
+};
 
   const approve = async (id) => {
     try {
@@ -98,14 +104,14 @@ export default function WardenDashboard() {
             <div style={{ display: "flex", gap: "6px" }}>
 
               <button
-                style={{ ...btn, background:"#059669" }}
+                style={{ ...btn, background: "#059669" }}
                 onClick={() => approve(x._id)}
               >
                 Approve
               </button>
 
               <button
-                style={{ ...btn, background:"#dc2626" }}
+                style={{ ...btn, background: "#dc2626" }}
                 onClick={() => reject(x._id)}
               >
                 Reject
