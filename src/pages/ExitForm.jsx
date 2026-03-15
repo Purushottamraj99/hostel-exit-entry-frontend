@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { api } from "../services/api";
 
 export default function ExitForm() {
@@ -8,11 +8,41 @@ export default function ExitForm() {
   const [reason, setReason] = useState("");
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [hasPending, setHasPending] = useState(false);
+
+  useEffect(() => {
+    if (studentId) {
+      checkPending();
+    }
+  }, [studentId]);
+
+  async function checkPending() {
+
+    try {
+
+      const res = await api.myRequests(studentId);
+
+      const pending = (res.data || []).find(
+        x => x.approvalStatus === "PENDING"
+      );
+
+      setHasPending(!!pending);
+
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
 
   const submit = async () => {
 
     if (!studentId) {
       setMsg("Student session not found");
+      return;
+    }
+
+    if (hasPending) {
+      setMsg("You already have a pending exit request");
       return;
     }
 
@@ -37,7 +67,9 @@ export default function ExitForm() {
 
       setReason("");
 
-    } catch (e) {
+      checkPending();
+
+    } catch {
       setMsg("Server error");
     } finally {
       setLoading(false);
@@ -66,7 +98,7 @@ export default function ExitForm() {
         <button
           className="btn exit-btn"
           onClick={submit}
-          disabled={loading}
+          disabled={loading || hasPending}
         >
           {loading ? "Submitting..." : "Submit Exit"}
         </button>
