@@ -1655,3 +1655,84 @@ body {
 .table-row a:hover {
   background: #1d4ed8;
 }
+
+
+/* warden dashboard */
+.warden-title{
+font-size:28px;
+font-weight:700;
+margin-bottom:20px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:20px;
+}
+
+.card{
+background:white;
+padding:22px;
+border-radius:14px;
+box-shadow:0 8px 24px rgba(0,0,0,0.06);
+}
+
+.card-title{
+font-size:13px;
+opacity:.7;
+}
+
+.card-value{
+font-size:30px;
+font-weight:700;
+}
+
+.notify{
+background:#f59e0b;
+color:white;
+padding:10px 14px;
+border-radius:8px;
+margin-bottom:15px;
+font-weight:600;
+}
+
+.table{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 6px 18px rgba(0,0,0,0.05);
+}
+
+.table-head{
+display:grid;
+grid-template-columns:1.3fr .7fr 2fr 1fr 1fr .8fr;
+background:#0f172a;
+color:white;
+padding:12px;
+font-weight:600;
+}
+
+.table-row{
+display:grid;
+grid-template-columns:1.3fr .7fr 2fr 1fr 1fr .8fr;
+padding:12px;
+border-top:1px solid #e5e7eb;
+font-size:14px;
+}
+
+.action-btn{
+padding:8px 12px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+color:white;
+}
+
+.approve{
+background:#059669;
+}
+
+.reject{
+background:#dc2626;
+}
