@@ -21,7 +21,7 @@ export default function StudentDashboard() {
   useEffect(() => {
     if (!id) return;
     load();
-  }, [id]);
+  }, [id, load]);
 
   async function load() {
     try {

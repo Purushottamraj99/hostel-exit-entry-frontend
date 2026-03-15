@@ -14,7 +14,7 @@ export default function ExitForm() {
     if (studentId) {
       checkPending();
     }
-  }, [studentId]);
+  }, [studentId, checkPending]);
 
   async function checkPending() {
 

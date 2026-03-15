@@ -78,7 +78,7 @@ export default function GuardVerify() {
 
     return () => scanner.stop().catch(() => {});
 
-  }, []);
+  }, [onScan]);
 
   /* ===== MANUAL VERIFY ===== */
   const manualVerify = async () => {
