@@ -21,11 +21,11 @@ export default function Sidebar({ open }) {
 
   const menus = {
     student: [
-  { to: "/student", label: "My Dashboard" , icon: <FaUserGraduate />},
-  { to: "/exit", label: "Exit Form", icon: <FaSignOutAlt />  },
-  { to: "/entry", label: "Entry Form", icon: <FaHome /> },
-  { to: "/my-requests", label: "My Requests", icon: <FaList /> },
-],
+      { to: "/student", label: "My Dashboard", icon: <FaUserGraduate /> },
+      { to: "/exit", label: "Exit Form", icon: <FaSignOutAlt /> },
+      { to: "/entry", label: "Entry Form", icon: <FaHome /> },
+      { to: "/my-requests", label: "My Requests", icon: <FaList /> },
+    ],
 
     admin: [
       { to: "/admin", label: "Dashboard", icon: <FaHome /> },

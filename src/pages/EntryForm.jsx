@@ -9,7 +9,7 @@ export default function EntryForm() {
 
     const studentId = localStorage.getItem("studentId");
 
-    // 🔥 safety check
+    // safety check
     if (!studentId) {
       setMsg("Login expired. Please login again.");
       return;
@@ -19,7 +19,7 @@ export default function EntryForm() {
       setLoading(true);
       setMsg("");
 
-     const res = await api.entry(studentId);
+      const res = await api.entry(studentId);
       console.log("ENTRY RESPONSE:", res);
 
       if (!res.success) {

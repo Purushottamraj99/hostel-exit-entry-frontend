@@ -15,35 +15,35 @@ export default function AdminDashboard() {
   useEffect(() => {
     load();
 
-    
+
     const interval = setInterval(load, 15000);
     return () => clearInterval(interval);
   }, []);
 
   const load = async () => {
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const t = await api.todayStats();
-    const o = await api.outsideList();
+      const t = await api.todayStats();
+      const o = await api.outsideList();
 
-    
-    setToday(t?.todayExits || t?.count || 0);
 
-    if (Array.isArray(o)) {
-      setOutside(o);
-    } else if (Array.isArray(o?.data)) {
-      setOutside(o.data);
-    } else {
-      setOutside([]);
+      setToday(t?.todayExits || t?.count || 0);
+
+      if (Array.isArray(o)) {
+        setOutside(o);
+      } else if (Array.isArray(o?.data)) {
+        setOutside(o.data);
+      } else {
+        setOutside([]);
+      }
+
+    } catch (e) {
+      console.log("DASHBOARD LOAD ERROR:", e);
+    } finally {
+      setLoading(false);
     }
-
-  } catch (e) {
-    console.log("DASHBOARD LOAD ERROR:", e);
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   if (loading) return <div className="pro-loading">Loading Dashboard...</div>;
 

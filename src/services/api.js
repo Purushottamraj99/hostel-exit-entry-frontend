@@ -54,8 +54,8 @@ export const api = {
 
   /* ===== STUDENT ===== */
 
-myRequests: (studentId) =>
-  jfetch(BASE + "/my-requests/" + studentId),
+  myRequests: (studentId) =>
+    jfetch(BASE + "/my-requests/" + studentId),
   /* ===== STAFF ===== */
 
   addStaff: (data) =>

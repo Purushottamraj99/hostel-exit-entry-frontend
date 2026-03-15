@@ -15,7 +15,7 @@ export default function Layout({ children }) {
             ☰
           </button>
 
-          <div style={{display:"flex",gap:10}}>
+          <div style={{ display: "flex", gap: 10 }}>
             <button className="btn" onClick={() => setDark(!dark)}>
               {dark ? "☀ Light" : "🌙 Dark"}
             </button>

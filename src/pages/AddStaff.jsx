@@ -17,43 +17,43 @@ export default function AddStaff() {
   const [toast, setToast] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const onChange = (k,v) =>
+  const onChange = (k, v) =>
     setForm({ ...form, [k]: v });
 
   const showToast = (msg) => {
     setToast(msg);
-    setTimeout(()=>setToast(""),2000);
+    setTimeout(() => setToast(""), 2000);
   };
 
-  const copy = (text,label) => {
+  const copy = (text, label) => {
     navigator.clipboard.writeText(text);
-    showToast(label+" copied");
+    showToast(label + " copied");
   };
 
   const submit = async (e) => {
     e.preventDefault();
 
-    if(!form.name.trim())
+    if (!form.name.trim())
       return showToast("Name required");
 
-    if(!form.mobile.trim())
+    if (!form.mobile.trim())
       return showToast("Mobile required");
 
-    try{
+    try {
       setLoading(true);
 
       const r = await fetch(
         `${BASE}/staff/add`,
         {
-          method:"POST",
-          headers:{ "Content-Type":"application/json"},
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form)
         }
       );
 
       const res = await r.json();
 
-      if(!res.success){
+      if (!res.success) {
         showToast(res.message || "Failed");
         return;
       }
@@ -61,20 +61,20 @@ export default function AddStaff() {
       setCreated(res.login);
 
       setForm({
-        name:"",
-        mobile:"",
-        email:"",
-        role:"warden",
-        shift:"morning",
-        address:"",
-        joiningDate:""
+        name: "",
+        mobile: "",
+        email: "",
+        role: "warden",
+        shift: "morning",
+        address: "",
+        joiningDate: ""
       });
 
       showToast("Staff created successfully");
 
-    }catch{
+    } catch {
       showToast("Server error");
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -89,23 +89,23 @@ export default function AddStaff() {
 
         <Field label="Full Name"
           value={form.name}
-          onChange={v=>onChange("name",v)}
+          onChange={v => onChange("name", v)}
         />
 
         <Field label="Mobile Number"
           value={form.mobile}
-          onChange={v=>onChange("mobile",v)}
+          onChange={v => onChange("mobile", v)}
         />
 
         <Field label="Email"
           value={form.email}
-          onChange={v=>onChange("email",v)}
+          onChange={v => onChange("email", v)}
         />
 
         <label>Role</label>
         <select className="input"
           value={form.role}
-          onChange={e=>onChange("role",e.target.value)}
+          onChange={e => onChange("role", e.target.value)}
         >
           <option value="warden">Warden</option>
           <option value="guard">Guard</option>
@@ -114,7 +114,7 @@ export default function AddStaff() {
         <label>Shift</label>
         <select className="input"
           value={form.shift}
-          onChange={e=>onChange("shift",e.target.value)}
+          onChange={e => onChange("shift", e.target.value)}
         >
           <option value="morning">Morning</option>
           <option value="evening">Evening</option>
@@ -123,12 +123,12 @@ export default function AddStaff() {
 
         <Field label="Joining Date"
           value={form.joiningDate}
-          onChange={v=>onChange("joiningDate",v)}
+          onChange={v => onChange("joiningDate", v)}
         />
 
         <Field label="Address"
           value={form.address}
-          onChange={v=>onChange("address",v)}
+          onChange={v => onChange("address", v)}
         />
 
         <button className="btn add-btn">
@@ -146,13 +146,13 @@ export default function AddStaff() {
           <Row
             k="Staff ID"
             v={created.staffId}
-            onCopy={()=>copy(created.staffId,"ID")}
+            onCopy={() => copy(created.staffId, "ID")}
           />
 
           <Row
             k="Password"
             v={created.password}
-            onCopy={()=>copy(created.password,"Password")}
+            onCopy={() => copy(created.password, "Password")}
           />
 
           <Row k="Role" v={created.role} />
@@ -167,24 +167,24 @@ export default function AddStaff() {
 
 /* ---------- components ---------- */
 
-function Field({ label,value,onChange }){
+function Field({ label, value, onChange }) {
   return (
     <div className="field">
       <label>{label}</label>
       <input
         className="input"
         value={value}
-        onChange={e=>onChange(e.target.value)}
+        onChange={e => onChange(e.target.value)}
       />
     </div>
   );
 }
 
-function Row({k,v,onCopy}){
+function Row({ k, v, onCopy }) {
   return (
     <div className="row">
       <span>{k}</span>
-      <div style={{display:"flex",gap:8}}>
+      <div style={{ display: "flex", gap: 8 }}>
         <b>{v}</b>
         {onCopy && (
           <button

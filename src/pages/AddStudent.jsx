@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {api } from "../services/api";
+import { api } from "../services/api";
 import { QRCodeCanvas } from "qrcode.react";
 
 export default function AddStudent() {
@@ -116,13 +116,13 @@ export default function AddStudent() {
       {created && (
         <div className="id-card">
 
-  <div className="id-header">
-    HOSTEL STUDENT ID CARD
-  </div>
+          <div className="id-header">
+            HOSTEL STUDENT ID CARD
+          </div>
 
-  <div className="id-body">
+          <div className="id-body">
 
-  {/* <div className="avatar">
+            {/* <div className="avatar">
     {created.name
       .split(" ")
       .map(x=>x[0])
@@ -131,48 +131,48 @@ export default function AddStudent() {
       .toUpperCase()}
   </div> */}
 
-  <div className="info-grid">
+            <div className="info-grid">
 
-    <div className="info-label">Name</div>
-    <div className="info-value">{created.name}</div>
-    <div></div>
+              <div className="info-label">Name</div>
+              <div className="info-value">{created.name}</div>
+              <div></div>
 
-    <div className="info-label">Room</div>
-    <div className="info-value">{created.room}</div>
-    <div></div>
+              <div className="info-label">Room</div>
+              <div className="info-value">{created.room}</div>
+              <div></div>
 
-    <div className="info-label">Phone</div>
-    <div className="info-value">{created.phone || "-"}</div>
-    <div></div>
-     
-     <div className="info-label">ID</div>
-    <div className="info-value">{created.studentId}</div>
-    <button className="copy-btn"
-      onClick={()=>copy(created.studentId,"ID")}>
-      Copy
-    </button>
+              <div className="info-label">Phone</div>
+              <div className="info-value">{created.phone || "-"}</div>
+              <div></div>
 
-    <div className="info-label">Password</div>
-    <div className="info-value">{created.password}</div>
-    <button className="copy-btn"
-      onClick={()=>copy(created.password,"Password")}>
-      Copy
-    </button>
-  </div>
+              <div className="info-label">ID</div>
+              <div className="info-value">{created.studentId}</div>
+              <button className="copy-btn"
+                onClick={() => copy(created.studentId, "ID")}>
+                Copy
+              </button>
 
-  <div className="qr-wrap">
-    <QRCodeCanvas
-      value={`ID:${created.studentId} PASS:${created.password}`}
-      size={110}
-    />
-  </div>
+              <div className="info-label">Password</div>
+              <div className="info-value">{created.password}</div>
+              <button className="copy-btn"
+                onClick={() => copy(created.password, "Password")}>
+                Copy
+              </button>
+            </div>
 
-  <button className="print-btn" onClick={printCard}>
-    🖨 Print ID Card
-  </button>
+            <div className="qr-wrap">
+              <QRCodeCanvas
+                value={`ID:${created.studentId} PASS:${created.password}`}
+                size={110}
+              />
+            </div>
 
-</div>
-</div>
+            <button className="print-btn" onClick={printCard}>
+              🖨 Print ID Card
+            </button>
+
+          </div>
+        </div>
       )}
 
       {toast && <div className="toast">{toast}</div>}

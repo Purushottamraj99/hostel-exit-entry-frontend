@@ -15,55 +15,55 @@ export default function Login() {
   const [showPass, setShowPass] = useState(false);
 
   const handleLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
+    try {
 
-    setLoading(true);
+      setLoading(true);
 
-    const res = await api.login(id, password, roleHint);
+      const res = await api.login(id, password, roleHint);
 
-    if (!res.success) {
-      setMsg(res.message || "Login failed");
-      return;
+      if (!res.success) {
+        setMsg(res.message || "Login failed");
+        return;
+      }
+
+      // SAVE SESSION
+      const user = {
+        ...res.user,
+        role: (res.user?.role || "").toLowerCase(),
+      };
+
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("role", user.role);
+
+      //  IMPORTANT FIX (ensure student id/name are always stored for student users)
+      if (user.role === "student") {
+        localStorage.setItem("studentId", user.id);
+        localStorage.setItem("studentName", user.name);
+      } else {
+        localStorage.removeItem("studentId");
+        localStorage.removeItem("studentName");
+      }
+
+      const role = user.role;
+
+      if (role === "admin") nav("/admin");
+      else if (role === "warden") nav("/warden");
+      else if (role === "guard") nav("/guard");
+      else nav("/student");
+
+    } catch (err) {
+
+      console.error(err);
+      setMsg("Server not reachable");
+
+    } finally {
+
+      setLoading(false);
+
     }
-
-    // SAVE SESSION
-    const user = {
-      ...res.user,
-      role: (res.user?.role || "").toLowerCase(),
-    };
-
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("role", user.role);
-
-    // ⭐ IMPORTANT FIX (ensure student id/name are always stored for student users)
-    if (user.role === "student") {
-      localStorage.setItem("studentId", user.id);
-      localStorage.setItem("studentName", user.name);
-    } else {
-      localStorage.removeItem("studentId");
-      localStorage.removeItem("studentName");
-    }
-
-    const role = user.role;
-
-    if (role === "admin") nav("/admin");
-    else if (role === "warden") nav("/warden");
-    else if (role === "guard") nav("/guard");
-    else nav("/student");
-
-  } catch (err) {
-
-    console.error(err);
-    setMsg("Server not reachable");
-
-  } finally {
-
-    setLoading(false);
-
-  }
-};
+  };
 
   return (
     <div className="login-wrap">

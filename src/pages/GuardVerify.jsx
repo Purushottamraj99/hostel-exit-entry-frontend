@@ -1,31 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
-import { BASE } from "../services/api";
+import { api } from "../services/api";
 
 export default function GuardVerify() {
 
   const [logId, setLogId] = useState("");
   const [data, setData] = useState(null);
   const [status, setStatus] = useState(""); // success / fail
+  const [message, setMessage] = useState("");
   const scannerRef = useRef(null);
 
-  useEffect(() => {
-
-    const scanner = new Html5Qrcode("qr-reader");
-    scannerRef.current = scanner;
-
-    scanner.start(
-      { facingMode: "environment" },
-      { fps: 10, qrbox: 220 },
-      onScan,
-      () => {}
-    );
-
-    return () => scanner.stop().catch(()=>{});
-  }, []);
-
   /* ===== SOUND ===== */
-  const beep = (ok=true) => {
+  const beep = (ok = true) => {
     const audio = new Audio(
       ok
         ? "https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
@@ -42,32 +28,61 @@ export default function GuardVerify() {
   const stopCamera = async () => {
     try {
       await scannerRef.current?.stop();
-    } catch {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const onScan = async (decoded) => {
-    try {
-      const id = decoded.split("/").pop();
-      setLogId(id);
+  /* ===== QR SCAN ===== */
+  async function onScan(decoded) {
 
-      const r = await api.verifyPass(id);
-      setData(r);
+      try {
 
-      if (r.valid) {
-        setStatus("success");
-        beep(true);
-        vibrate();
-        stopCamera(); // ⭐ auto stop
-      } else {
-        setStatus("fail");
-        beep(false);
-        vibrate();
+        const id = decoded.split("/").pop();
+        setLogId(id);
+
+        const r = await api.verifyPass(id);
+        setData(r);
+
+        if (r.valid) {
+          setStatus("success");
+          setMessage("Gate Pass Verified ✔");
+          beep(true);
+          vibrate();
+          stopCamera();
+        } else {
+          setStatus("fail");
+          setMessage("Invalid Gate Pass ✖");
+          beep(false);
+          vibrate();
+        }
+
+      } catch {
+        setMessage("Verification failed");
       }
 
-    } catch {}
-  };
+    }
 
+  /* ===== START CAMERA ===== */
+  useEffect(() => {
+
+    const scanner = new Html5Qrcode("qr-reader");
+    scannerRef.current = scanner;
+
+    scanner.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: 220 },
+      onScan,
+      () => {}
+    );
+
+    return () => scanner.stop().catch(() => {});
+
+  }, []);
+
+  /* ===== MANUAL VERIFY ===== */
   const manualVerify = async () => {
+
     if (!logId) return;
 
     const r = await api.verifyPass(logId);
@@ -75,41 +90,56 @@ export default function GuardVerify() {
 
     if (r.valid) {
       setStatus("success");
+      setMessage("Gate Pass Verified ✔");
       beep(true);
       vibrate();
       stopCamera();
     } else {
       setStatus("fail");
+      setMessage("Invalid Gate Pass ✖");
       beep(false);
       vibrate();
     }
+
   };
 
   return (
     <div className="guard-wrap">
 
       <div className={`guard-card ${status}`}>
+
         <h2>🛡 Guard Security Scanner</h2>
 
-        {/* scanner */}
+        {/* QR scanner */}
         <div className="scanner-box">
-          <div id="qr-reader" className="qr-box"/>
-          <div className="scan-line"/>
+          <div id="qr-reader" className="qr-box" />
+          <div className="scan-line" />
         </div>
 
+        {/* manual input */}
         <input
           className="guard-input"
           placeholder="Paste logId"
           value={logId}
-          onChange={e=>setLogId(e.target.value)}
+          onChange={(e) => setLogId(e.target.value)}
         />
 
         <button className="guard-btn" onClick={manualVerify}>
           Verify Manually
         </button>
 
+        {/* verification message */}
+        {message && (
+          <div className={`verify-msg ${status}`}>
+            {message}
+          </div>
+        )}
+
+        {/* result */}
         {data && <Result data={data} />}
+
       </div>
+
     </div>
   );
 }
@@ -123,18 +153,22 @@ function Result({ data }) {
 
   return (
     <div className="guard-result">
+
       <div className="badge ok">✅ VALID PASS</div>
 
       <Row k="Student" v={data.student}/>
       <Row k="Room" v={data.room}/>
       <Row k="Status" v={data.status}/>
       <Row k="Exit" v={fmt(data.exitTime)}/>
+
       {data.entryTime && <Row k="Entry" v={fmt(data.entryTime)}/>}
+
     </div>
   );
+
 }
 
-function Row({k,v}) {
+function Row({ k, v }) {
   return (
     <div className="guard-row">
       <span>{k}</span>
@@ -143,6 +177,6 @@ function Row({k,v}) {
   );
 }
 
-function fmt(t){
+function fmt(t) {
   return new Date(t).toLocaleString("en-IN");
 }

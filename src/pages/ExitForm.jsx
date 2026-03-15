@@ -35,22 +35,18 @@ export default function ExitForm() {
   }
 
   const submit = async () => {
-
     if (!studentId) {
       setMsg("Student session not found");
       return;
     }
-
     if (hasPending) {
       setMsg("You already have a pending exit request");
       return;
     }
-
     if (!reason.trim()) {
       setMsg("Reason required");
       return;
     }
-
     try {
 
       setLoading(true);
@@ -62,21 +58,14 @@ export default function ExitForm() {
         setMsg(res.message || "Request failed");
         return;
       }
-
       setMsg("Exit request sent to warden. Waiting for approval.");
-
       setReason("");
-
       checkPending();
-
     } catch {
       setMsg("Server error");
     } finally {
       setLoading(false);
-    }
-
-  };
-
+    } };
   return (
     <div className="exit-page">
 
@@ -94,7 +83,6 @@ export default function ExitForm() {
           value={reason}
           onChange={e => setReason(e.target.value)}
         />
-
         <button
           className="btn exit-btn"
           onClick={submit}
@@ -102,7 +90,6 @@ export default function ExitForm() {
         >
           {loading ? "Submitting..." : "Submit Exit"}
         </button>
-
         {msg && <p className="exit-msg">{msg}</p>}
 
       </div>
