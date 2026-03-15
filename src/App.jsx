@@ -15,6 +15,7 @@ import StudentsList from "./pages/StudentsList";
 import AddStaff from "./pages/AddStaff";
 import StaffList from "./pages/StaffList";
 import MyRequests from "./pages/MyRequests";
+import VerifyPass from "./pages/VerifyPass";
 
 
 export default function App() {
@@ -44,6 +45,11 @@ export default function App() {
       <Route path="/guard" element={
         <ProtectedRoute allow={["guard"]}>
           <Layout><GuardVerify /></Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/verify/:id" element={
+        <ProtectedRoute allow={["admin", "warden", "guard"]}>
+          <Layout><VerifyPass /></Layout>
         </ProtectedRoute>
       } />
 

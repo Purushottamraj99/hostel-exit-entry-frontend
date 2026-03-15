@@ -14,7 +14,7 @@ export default function ExitForm() {
     if (studentId) {
       checkPending();
     }
-  }, [studentId, checkPending]);
+  }, [studentId]);
 
   async function checkPending() {
 
@@ -83,6 +83,7 @@ export default function ExitForm() {
           value={reason}
           onChange={e => setReason(e.target.value)}
         />
+
         <button
           className="btn exit-btn"
           onClick={submit}
